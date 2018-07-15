@@ -1,5 +1,6 @@
 """Generate time-based one-time passwords per RFC 6238."""
 from calendar import timegm
+from os import urandom
 from time import gmtime
 import hashlib
 import hmac
@@ -72,3 +73,14 @@ def totp(key, current=None, epoch=DEFAULT_EPOCH, step=DEFAULT_TIME_STEP):
     current system clock time in UTC and the Unix Epoch.
     """
     return hotp(key, time_steps(current, epoch, step))
+
+
+def generate_key(size=20):
+    """Return a randomly-generated key value of 'size' bytes.
+
+    The byte values are generated using os.urandom, which draws from the
+    system's source of random data.  This function can only be relied upon to
+    generate cryptographically robust random keys on systems where SystemRandom
+    yields high-quality random data.
+    """
+    return urandom(size)
