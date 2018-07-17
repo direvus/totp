@@ -14,7 +14,7 @@ DEFAULT_DIGITS = 6
 
 def current_timestamp_utc():
     """Return the current time in UTC as integer seconds since Epoch."""
-    return long(timegm(gmtime()))
+    return int(timegm(gmtime()))
 
 
 def time_steps(current=None, epoch=DEFAULT_EPOCH, step=DEFAULT_TIME_STEP):
