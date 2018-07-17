@@ -1,6 +1,10 @@
 """Generate key URIs for TOTP."""
 from base64 import b32encode
-from urllib import urlencode, quote
+try:
+    from urllib import urlencode, quote
+except ImportError:
+    # Thanks for this charming work-around, Python3
+    from urllib.parse import urlencode, quote
 
 
 def key_uri(key, issuer, accountname, digits, step):
